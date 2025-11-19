@@ -52,6 +52,10 @@ export default {
 
         // 3. Alert and Redirect
         alert('Login Successful! Welcome ' + user.name);
+
+        // This forces App.vue to re-check localStorage immediately
+        this.$emit('login-success');
+
         this.$router.push('/'); // Go Home
 
       } catch (error) {
