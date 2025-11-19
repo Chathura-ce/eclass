@@ -11,9 +11,15 @@
             Login
           </router-link>
 
-          <button v-else @click="logout" class="text-red-500 hover:text-red-700 ml-4 font-semibold">
-            Logout
-          </button>
+          <template v-if="isLoggedIn">
+            <router-link to="/my-bookings" class="mr-4 text-gray-600 hover:text-blue-600 font-medium">
+              My Bookings
+            </router-link>
+
+            <button @click="logout" class="text-red-500 hover:text-red-700 ml-4 font-semibold">
+              Logout
+            </button>
+          </template>
         </div>
       </div>
     </nav>
