@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TeacherProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -66,3 +67,14 @@ Route::middleware(['auth:sanctum', 'role:student'])
 // because the controller handles both roles logic.
 Route::middleware(['auth:sanctum'])
     ->get('/my-bookings', [BookingController::class, 'index']);
+
+
+
+
+// 1. Initiate Payment (Student asks for PayHere config)
+Route::middleware(['auth:sanctum', 'role:student'])
+    ->get('/payment/initiate/{bookingId}', [PaymentController::class, 'initiate']);
+
+// 2. Webhook (PayHere calls this automatically)
+// NOTE: No auth middleware here because PayHere is an external server
+Route::post('/payment/notify', [PaymentController::class, 'notify']);
