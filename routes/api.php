@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\StudentAuthController;
 use App\Http\Controllers\Auth\TeacherAuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\TeacherDashboardController;
 use App\Http\Controllers\TeacherProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/profile', 'edit');   // Get logged-in profile
         Route::put('/profile', 'update'); // Update logged-in profile
         // Route::get('/bookings', [TeacherBookingController::class, 'index']);
+         Route::get('/dashboard', [TeacherDashboardController::class, 'index']);
     });
 
 

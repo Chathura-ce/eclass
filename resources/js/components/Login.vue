@@ -56,7 +56,14 @@ export default {
         // This forces App.vue to re-check localStorage immediately
         this.$emit('login-success');
 
-        this.$router.push('/'); // Go Home
+        // Redirect based on role
+        if (user.role === 'teacher') {
+          this.$router.push('/teacher/dashboard');
+        } else {
+          this.$router.push('/');
+        }
+
+        // this.$router.push('/'); // Go Home
 
       } catch (error) {
         if (error.response && error.response.data.errors) {

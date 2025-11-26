@@ -10,15 +10,18 @@
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div v-for="teacher in teachers" :key="teacher.id" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between">
+      <div v-for="teacher in teachers" :key="teacher.id"
+           class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between">
         <div>
           <div class="flex items-center mb-4">
-            <div class="bg-gray-200 rounded-full h-12 w-12 flex items-center justify-center text-xl font-bold text-gray-600">
+            <div
+                class="bg-gray-200 rounded-full h-12 w-12 flex items-center justify-center text-xl font-bold text-gray-600">
               {{ teacher.user.name.charAt(0) }}
             </div>
             <div class="ml-4">
               <h3 class="font-bold text-lg">{{ teacher.user.name }}</h3>
-              <span v-if="teacher.verified" class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Verified</span>
+              <span v-if="teacher.verified"
+                    class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Verified</span>
             </div>
           </div>
           <p class="text-gray-600 mb-4 line-clamp-3">
@@ -28,11 +31,17 @@
 
         <div class="flex justify-between items-center mt-4 pt-4 border-t">
           <span class="font-bold text-blue-600">LKR {{ teacher.hourly_rate }}/hr</span>
+
           <button
+              v-if="userRole !== 'teacher'"
               @click="openBooking(teacher)"
               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
             Book Now
           </button>
+
+          <span v-else class="text-xs text-gray-400">
+        (Teacher View)
+    </span>
         </div>
       </div>
     </div>
@@ -60,7 +69,8 @@ export default {
       teachers: [],
       loading: true,
       showModal: false,
-      selectedTeacher: null
+      selectedTeacher: null,
+      userRole: ''
     }
   },
   async mounted() {

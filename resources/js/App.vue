@@ -2,24 +2,26 @@
   <div class="min-h-screen bg-gray-50">
     <nav class="bg-white shadow p-4 mb-6">
       <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-xl font-bold text-blue-600">E-Class MVP</h1>
+        <router-link :to="homeLink" class="text-xl font-bold text-blue-600">
+          E-Class MVP
+        </router-link>
 
         <div>
-          <router-link to="/" class="mr-4 text-gray-600 hover:text-blue-600">Home</router-link>
+          <router-link :to="homeLink" class="mr-4 text-gray-600 hover:text-blue-600">
+            {{ userRole === 'teacher' ? 'Dashboard' : 'Home' }}
+          </router-link>
+
+          <router-link v-if="isLoggedIn" to="/my-bookings" class="mr-4 text-gray-600 hover:text-blue-600 font-medium">
+            {{ userRole === 'teacher' ? 'My Schedule' : 'My Bookings' }}
+          </router-link>
 
           <router-link v-if="!isLoggedIn" to="/login" class="text-gray-600 hover:text-blue-600">
             Login
           </router-link>
 
-          <template v-if="isLoggedIn">
-            <router-link to="/my-bookings" class="mr-4 text-gray-600 hover:text-blue-600 font-medium">
-              My Bookings
-            </router-link>
-
-            <button @click="logout" class="text-red-500 hover:text-red-700 ml-4 font-semibold">
-              Logout
-            </button>
-          </template>
+          <button v-else @click="logout" class="text-red-500 hover:text-red-700 ml-4 font-semibold">
+            Logout
+          </button>
         </div>
       </div>
     </nav>
@@ -37,7 +39,13 @@ export default {
   name: 'App',
   data() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      userRole: ''
+    }
+  },
+  computed:{
+    homeLink(){
+      return this.userRole === 'teacher' ? '/teacher/dashboard' : '/';
     }
   },
   created() {
@@ -53,6 +61,7 @@ export default {
     checkLoginStatus() {
       // Check if a token exists in LocalStorage
       this.isLoggedIn = !!localStorage.getItem('token');
+      this.userRole = localStorage.getItem('user_role');
     },
     async logout() {
       try {
@@ -73,8 +82,8 @@ export default {
 
         // 3. Update State
         this.isLoggedIn = false;
-
-        // 4. Redirect to Login
+        this.userRole = ''; // Clear role
+        // 4. Redirect to Log in
         this.$router.push('/login');
         alert('Logged out successfully.');
       }

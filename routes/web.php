@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Send ALL web requests to the 'welcome' view
-// Vue Router will handle the actual navigation inside the browser
+// Define the "login" route name so Laravel knows where to redirect
+Route::get('/login', function () {
+    return view('welcome');
+})->name('login');
+
+// Existing catch-all route (Keep this at the bottom)
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
