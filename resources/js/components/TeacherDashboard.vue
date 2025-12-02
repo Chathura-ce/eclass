@@ -40,7 +40,7 @@
             <th class="px-6 py-3">Student</th>
             <th class="px-6 py-3">Date & Time</th>
             <th class="px-6 py-3">Status</th>
-          </tr>
+            <th class="px-6 py-3">Action</th> </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
           <tr v-for="cls in stats.upcoming_classes" :key="cls.id">
@@ -49,6 +49,17 @@
             <td class="px-6 py-4">
               <span class="px-2 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800" v-if="cls.status === 'confirmed'">Confirmed</span>
               <span class="px-2 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-800" v-else>Pending</span>
+            </td>
+            <td class="px-6 py-4">
+              <a
+                  v-if="cls.status === 'confirmed'"
+                  :href="'https://meet.jit.si/EClass_Lesson_' + cls.id"
+                  target="_blank"
+                  class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700 flex items-center w-max"
+              >
+                🎥 Start Class
+              </a>
+              <span v-else class="text-gray-400 text-xs italic">Waiting for payment</span>
             </td>
           </tr>
           </tbody>

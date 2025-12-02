@@ -85,7 +85,7 @@ export default {
         this.userRole = ''; // Clear role
         // 4. Redirect to Log in
         this.$router.push('/login');
-        alert('Logged out successfully.');
+        // alert('Logged out successfully.');
       }
     }
   }

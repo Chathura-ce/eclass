@@ -51,7 +51,7 @@ export default {
         localStorage.setItem('user_role', user.role);
 
         // 3. Alert and Redirect
-        alert('Login Successful! Welcome ' + user.name);
+        // alert('Login Successful! Welcome ' + user.name);
 
         // This forces App.vue to re-check localStorage immediately
         this.$emit('login-success');

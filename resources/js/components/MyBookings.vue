@@ -20,22 +20,34 @@
         <tr v-for="booking in bookings" :key="booking.id" class="border-b hover:bg-gray-50">
           <td class="p-3 text-gray-500">#{{ booking.id }}</td>
           <td class="p-3">{{ formatDate(booking.scheduled_at) }}</td>
-          <td class="p-3 font-bold text-gray-700">{{ booking.teacher?.name }}</td>
+          <td class="p-3 font-bold text-gray-700">
+            {{ role === 'student' ? booking.teacher?.name : booking.student?.name }}
+          </td>
           <td class="p-3">LKR {{ booking.price }}</td>
 
           <td class="p-3">
-                            <span :class="statusColor(booking.status)" class="px-2 py-1 rounded-full text-xs font-bold uppercase">
-                                {{ booking.status }}
-                            </span>
+            <span :class="statusColor(booking.status)" class="px-2 py-1 rounded-full text-xs font-bold uppercase">
+                {{ booking.status }}
+            </span>
           </td>
 
           <td class="p-3">
             <button
-                v-if="booking.status === 'pending'"
+                v-if="booking.status === 'pending' && role === 'student'"
                 @click="payNow(booking)"
                 class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
               Pay Now
             </button>
+
+            <a
+                v-else-if="booking.status === 'confirmed'"
+                :href="'https://meet.jit.si/EClass_Lesson_' + booking.id"
+                target="_blank"
+                class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 flex items-center w-max">
+              🎥 Join Class
+            </a>
+
+            <span v-else class="text-gray-400 text-xs">-</span>
           </td>
         </tr>
         </tbody>
