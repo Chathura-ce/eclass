@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-blue-600 text-white p-12 rounded-lg mb-8 text-center">
-      <h2 class="text-4xl font-bold mb-4">Find the Best Tutors in Sri Lanka!</h2>
+      <h2 class="text-4xl font-bold mb-4">Find the Best Tutors in Sri Lanka!!!</h2>
       <p class="text-xl">Book online lessons with verified teachers today.</p>
     </div>
 
