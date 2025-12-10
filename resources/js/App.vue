@@ -3,7 +3,7 @@
     <nav class="bg-white shadow p-4 mb-6">
       <div class="container mx-auto flex justify-between items-center">
         <router-link :to="homeLink" class="text-xl font-bold text-blue-600">
-          E-Class MVP
+          E-Class MVP.
         </router-link>
 
         <div>
